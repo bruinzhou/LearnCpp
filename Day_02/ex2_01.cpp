@@ -16,6 +16,8 @@ int main(){
             inf.getline(s1,sizeof(s1)-1);
             outf<<std::setfill('0')<<std::setw(4)<<++cnt<<" "<<s1<<std::endl;
         }
+        outf.close();
+        inf.close();
     }
-
+    return 0;
 }
