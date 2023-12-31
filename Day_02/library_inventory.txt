@@ -1,0 +1,3 @@
+The C++ Programming Language,Bjarne Stroustrup,1985
+Effective Modern C++,Scott Meyers,2014
+Design Patterns,Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides,1994
