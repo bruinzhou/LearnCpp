@@ -1,0 +1,103 @@
+访问对象成员的方法
+通过对象名和对象成员引用符.访问对象中的成员
+对象指针访问
+对象的变量引用访问
+
+class Data{
+    public:
+      int data;
+      void fun(int a,int b,int d);
+    private:
+      void add(int m){
+        data+=m;
+      }
+      int x,y;
+};
+
+void caller1(){
+    Data A,B;
+    A.fun(1,2,3);
+    B.data=101;
+}
+void caller1(){
+    Data A,*p,*p1;
+    p1=&A;
+    p1->data=100;
+    p1->fun(1,2,3);
+    p=new data;
+    p->dat100;
+    p->fun(1,2,3);
+    delete p;
+}
+void caller1(){
+    Data A,&r=A;
+    r.data=100;
+    r.fun(1,2,3);
+}
+
+对象的赋值
+如果一个类定义了两个或多个对象，同类的对象之间可以相互赋值
+
+函数参数是对象时
+行参是对象时，实参要求是相同类的对象名
+形参是对象指针时，实参要求是同类对象的指针
+形参是对象引用时，实参是同类的对象
+
+#include<iostream>
+void fun1(Data a,Data *p,Data &r){
+  a.data=100;
+  p->data=200;
+  r.data=300;
+}
+int main(){
+  Data A,B,C;
+  A.fun(1,2,3);
+  B.fun(4,5,6);
+  C.fun(7,8,9);
+  fun(A,&B,C);
+  return 0;
+}
+
+如果不希望在函数中修改实参的对象的值，函数形参可以作为Const限定
+void fun2(Dat a,const Data *p,const Data &r){
+  a.data=100;
+  p->data=200; 错误，无法修改
+  r.data=300; 错误，无法修改
+}
+
+函数返回值可以是对象，对象指针或对象引用
+函数返回对象指针，或引用，本质上返回对象的地址而不是它的存储内容，因此不返回局部对象的指针或引用
+
+Data func1(){
+    Data a;
+    a.fun(1,2,3);
+    return a;
+}
+Data* func2(Data *p1,Data *p2){
+  if(p1->data>p2->data) return p1;
+  return p2;
+}
+Data& func3(Data &r1,Data &r2){
+  if(r1.data>r2.data) return r1;
+    return r2;
+}
+void caller(){
+  Data A,B,C;
+  A.fun(1,2,3);
+  B.fun(4,5,6);
+  C=func1();
+  func2(&A,&B)->data=100;
+  func3(A,B).data=100;
+}
+
+返回局部对象的指针
+Data* func(){
+  Data a;
+  Data *p=&a;
+  return p;
+}
+void caller(){
+  Data *p1;
+  p1=func();
+  p1->data=100;
+}
