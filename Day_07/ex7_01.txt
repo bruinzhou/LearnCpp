@@ -1,0 +1,24 @@
+构造函数创建对象时初始化对象
+不能在类定义时初始化
+class Point{
+    int x=0,y=0;
+}
+#include<iostream>
+class Cuboid{
+    public:
+      Cuboid(int l,int h,int d);
+      int volumn(){return length*height*depth;}
+    private:
+      int length,height,depth;
+};
+Cuboid::Cuboid(int l,int h,int d){
+    length=l,height=h,depth=d;
+    std::cout<<"Cuboid： "<<"L="<<l<<",H="<<h<<",D="<<d<<std::endl;
+}
+int main(){
+    Cuboid a(1,2,3);
+    std::cout<<"volumn="<<a.volumn()<<std::endl;
+    Cuboid b(10,20,30);
+    std::cout<<"volumn="<<b.volumn()<<std::endl;
+    return 0;
+}
