@@ -12,7 +12,7 @@ public:
   bool ListInsert(int i,const T& e);
   bool ListDelete(int i);
   bool GetElem(int i,T& e);
-  int LocateElem(const T &e);
+  int LocateElem(const T& e);
 
   void DispList();
   int ListLength();
@@ -46,6 +46,7 @@ bool SeqList<T>::ListInsert(int i,const T& e){
   if(m_length>=m_maxsize){
     std::cout<<"顺序表已满，不能在进行插入操作！"<<std::endl;
     return false;
+    IncreaseSize();
   }
   //判断插入位置i是否合法，i的位置应该是1到m_length+1
   if(i<1||i>(m_length+1)){
@@ -127,7 +128,23 @@ void SeqList<T>::ReverseList(){
     return;
   }
   T temp;
-  
+  for(int i=0;i<m_length/2;++i){
+    temp=m_data[i];
+    m_data[i]=m_data[m_length-i-1];
+    m_data[m_length-i-1]=temp;
+  }
+}
+
+//顺序表的扩展操作
+template<typename T>
+void SeqList<T>::IncreaseSize(){
+  T* p=m_data;
+  m_data=new T[m_maxsize+IncSize];
+  for(int i=0;i<m_length;i++){
+    m_data[i]=p[i];
+  }
+  m_maxsize=m_maxsize+IncSize;
+  delete[] p;
 }
 
 int main(){
@@ -140,5 +157,10 @@ int main(){
     seqobi.GetElem(1,eval);
     int findvalue=10;
     seqobi.LocateElem(findvalue);
+    seqobi.ListInsert(2,100);
+    seqobi.DispList();
+    std::cout<<seqobi.ListLength()<<std::endl;
+    seqobi.ReverseList();
+    seqobi.DispList();
     return 0;
 }
